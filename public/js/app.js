@@ -106,7 +106,6 @@ $(function(){
   }
 
   var newAccountCreated = function(data){
-    $($session).empty()
     var $created = $('<div class=created>')
     $('.created').empty()
     $created.text(data.msg)
@@ -119,6 +118,10 @@ $(function(){
     var html = Handlebars.compile($("#buttons").html());
     //
     if (data.msg){
+      var $created = $('<div class=created>')
+      $('.created').empty()
+      $created.text(data.msg)
+      $session.append($created)
     }else{
       $session.empty()
       $session.append(html(data[0]))}

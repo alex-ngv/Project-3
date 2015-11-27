@@ -20,7 +20,7 @@ module.exports.controller = function(app) {
           res.send(user);
           console.log(req.session)
         } else {
-          res.send('Incorrect password.');
+          res.send({msg:'Incorrect password.'});
           }
         });
       }
