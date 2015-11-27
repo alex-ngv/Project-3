@@ -16,9 +16,25 @@ $(function(){
     $.post('/sessions' , {name:$usernameField, password:$passwordField},assignSession,'JSON')
   })
 
+  $session.on('click','#newAccount',function(e){
+    e.preventDefault()
+    console.log('hihihihi')
+    $.post('/users', {name:$usernameField, password:$passwordField},newAccountCreated,'JSON')
+  });
+
+  $session.on('click','#logout',function(e){
+    e.preventDefault();
+    console.log('LOGOUT');
+    $.ajax({
+      url:'/sessions',
+      method: 'DELETE'
+    }).done(loggedOut)
+  });
+
+
   $session.on('click','#farms',function(e){
     e.preventDefault();
-    console.log()
+    console.log('he')
     $.get('/farm',createArray,'JSON')
   })
   $session.on('click','#toilets',function(e){
@@ -83,21 +99,6 @@ $(function(){
      console.log('all done')
     console.log(boroughData)
   }
-
-  $newAccount.click(function(e){
-    e.preventDefault()
-    $.post('/users', {name:$usernameField.val(), password:$passwordField.val()},newAccountCreated,'JSON')
-  });
-
-
-  $($session).on('click','#logout',function(e){
-    e.preventDefault();
-    console.log('LOGOUT');
-    $.ajax({
-      url:'/sessions',
-      method: 'DELETE'
-    }).done(loggedOut)
-  });
 
   var loggedOut = function () {
     var html = Handlebars.compile($("#login-view").html());

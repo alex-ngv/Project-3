@@ -39,7 +39,7 @@ module.exports.controller = function(app) {
                 console.log(err);
               } else {
                 console.log("User saved");
-                res.send("User "+user.name+" created.");
+                res.send({msg:"User "+user.name+" created."});
               }
             });
           }
