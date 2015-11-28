@@ -182,123 +182,111 @@ $(function(){
 
   $(function(){
 
-    moveStuff()
-    $('.container').on('click','#toilets',function(e){
+    var mapSVG = $('#viewport').children()
+    $(mapSVG[0]).on('click',function(e){
       e.preventDefault();
-      setTimeout(function(){realdata = boroughData;moveStuff()},1500)
+      setTimeout(function(){ pullData()},200)
     })
 
-
-
-    $('#move').on('click', moveStuff)
-    $('#finish').on('click', finishStuff)
+    $('.container').on('click','#button',function(e){
+      e.preventDefault();
+      gullible()
+    })
 
   })
 
-  var fakeData = [1]
-  var data = [15,25,35,45]
-  var realdata = [{borough:"Brooklyn",number:35},{borough:"Queens",number:11},{borough:"Manhattan",number:28},{borough:"Bronx",number:22},{borough:"Si",number:1}]
+//  var boroughData = []
   var outerRadius = 250
-  var innerRadius = 80
-  var dataLabel = "Farmer's Market Share"
+  var innerRadius = 110
 
 
-  var setDataVariables = function (d) {
-    console.log("Hi There b")
-    console.log(d)
-    realdata = d
+  var pullData = function () {
+    var test  = $( "#sel1 option:selected" )[0].id
+    $.get('/data/'+test).done(seedData)
   }
 
-  var color = d3.scale.ordinal()
-                .range(["#3498db","#e74c3c","#95a5a6","#f1c40f","#2ecc71"])
-
-  var canvas = d3.select('body').append('svg')
-                .attr("width", 675)
-                .attr("height", 600)
-                //.style("border","5px ridge")
-                .style("display","block")
-                .style("position","absolute")
-                .style("top","100px")
-                .style("right","40px")
-                .style("margin","auto");
-
-  var group = canvas.append('g')
-                    .attr("transform","translate(250,300)")
-
-  var arc = d3.svg.arc()
-              .innerRadius(innerRadius)
-              .outerRadius(outerRadius)
-
-  var donut = d3.layout.pie()
-                .value(function(d){return d.number})
+  var seedData = function (d) {
+    boroughData = d[0].data
+    moveStuff()
+  }
 
 
   var moveStuff = function(){
 
-    var arcs = group.selectAll('.arc')
+        $(".data-vis").remove()
+
+        var color = d3.scale.ordinal()
+                .range(["#3498db","#e74c3c","#95a5a6","#f1c40f","#2ecc71"])
+
+        var canvas = d3.select('body').append('svg')
+                .attr("width", 675)
+                .attr("height", 550)
+                //.style("border","5px ridge")
+                .style("display","block")
+                .style("position","absolute")
+                .style("top","160px")
+                .style("right","40px")
+                .style("margin","auto")
+                .attr("class","data-vis")
+
+        var group = canvas.append('g')
+                .attr("transform","translate(250,260)")
+
+        var arc = d3.svg.arc()
+              .innerRadius(innerRadius)
+              .outerRadius(outerRadius)
+
+        var donut = d3.layout.pie()
+                .value(function(d){return d.number})
+
+        var arcs = group.selectAll('.arc')
                     .data(0)
-                    .data(donut(realdata))
+                    .data(donut(boroughData))
                     .enter()
                     .append('g')
                     .attr('class','arc')
 
-    arcs.append('path')
-        .transition()
-        .duration(900)
-        .attr("d",arc)
-        .attr("fill",function(d){return color(d.data.number)})
+        arcs.append('path')
+            .transition()
+            .duration(1500)
+            .attr("d",arc)
+            .attr("fill",function(d){return color(d.data.number)})
 
-    arcs.append('text')
-        .attr("transform", function(d){return "translate (" + arc.centroid(d) + ")"})
-        .text(function(d){return d.data.number})
-        .attr("font-size","2em")
-
-  // var textLabel = arcs.append('text')
-  //                     .attr("transform","translate(-125,-400)")
-  //                     .style('fill','white')
-  //                     .transition()
-  //                     .duration(400)
-  //                     .text(dataLabel)
-  //                     .style('fill','black')
-  //                     .attr("font-size","1.7em")
-
-  labelG = canvas.append('g')
-
-  var circleLabels = labelG.selectAll('circle')
-        .data(realdata)
-        .enter()
-        .append('circle')
-        .attr("r","15")
-        .attr("transform",function(d,i){return "translate(550," +(i*40+70)+ ")"})
-        .attr("fill",function(d){return color(d.number)})
-
-  circleTextG = canvas.append('g')
-
-  var circleText = circleTextG.selectAll('text')
-            .data(realdata)
-            .enter()
-            .append('text')
-            .text(function(d){return d.borough})
-            .attr("transform",function(d,i){return "translate(575," +(i*40+77)+ ")"})
-            .style("font-size","1.3em")
-
-   }
-
-  var finishStuff = function(){
-    d3.selectAll('.arc').transition().duration(00).remove()
-
-  }
+        arcs.append('text')
+            .attr("transform", function(d){return "translate (" + arc.centroid(d) + ")"})
+            .text(function(d){return d.data.number})
+            .attr("font-size","1.3em")
 
 
+        labelG = canvas.append('g')
 
-var mufasa = canvas.append("image")
+        var circleLabels = labelG.selectAll('circle')
+              .data(boroughData)
+              .enter()
+              .append('circle')
+              .attr("r","15")
+              .attr("transform",function(d,i){return "translate(550," +(i*40+70)+ ")"})
+              .attr("fill",function(d){return color(d.number)})
+
+        circleTextG = canvas.append('g')
+
+        var circleText = circleTextG.selectAll('text')
+                  .data(boroughData)
+                  .enter()
+                  .append('text')
+                  .text(function(d){return d.borough})
+                  .attr("transform",function(d,i){return "translate(575," +(i*40+77)+ ")"})
+                  .style("font-size","1.3em")
+
+
+    var mufasa = canvas.append("image")
                 .attr("xlink:href", "http://dash.ponychan.net/chan/files/src/136167943291.gif")
                 .attr("x", 1080)
                 .attr("y", 20)
                 .attr("width", 10)
                 .attr("height", 10)
                 .transition()
-                .delay(21000)
+                .delay(2000)
                 .duration(2000)
                 .attr("x",0)
                 .attr("y",0)
@@ -309,24 +297,19 @@ var mufasa = canvas.append("image")
                 .attr("width", 0)
                 .attr("height", 0)
 
+   }
 
+  var finishStuff = function(){
+      d3.selectAll(canvas).transition().duration(00).remove()
 
+  }
 
-
-  // left = 11500
-  // var mufasa = function() {
-  //   var pony = $('#mufasa');
-  //   left = left - 10
-  //   $(pony).css("left", left + "px")
-  //   $(pony).css("position","absolute")
-  //   $(pony).css("top", "150px")
-  //   if (left < -120000) {
-  //     left = 120000
-  //   }
-  // };
-  //
-  // setInterval(mufasa,10)
-
+  var gullible = function () {
+    var frame = $('<iframe width="675" height="550" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" frameborder="0" allowfullscreen></iframe>').appendTo('body');
+    frame.css("position","absolute")
+    frame.css("top","160px")
+    frame.css("right","40px")
+  }
 
 
 });

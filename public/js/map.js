@@ -1,26 +1,34 @@
 $(function () {
+
   $('#viewport').on('click', '#manhattan', function (e) {
-    e.preventDefault()
-    console.log('Manhattan');
+    e.preventDefault();
+    userSelection.text("You Selected Manhattan");
   });
   $('#viewport').on('click', '#brooklyn', function (e) {
-    e.preventDefault()
-    console.log('Brooklyn');
+    e.preventDefault();
+    userSelection.text("You Selected Brooklyn");
   });
   $('#viewport').on('click', '#queens', function (e) {
-    e.preventDefault()
-    console.log('Queens');
+    e.preventDefault();
+    userSelection.text("You Selected Queens");
   });
   $('#viewport').on('click', '#bronx', function (e) {
-    e.preventDefault()
-    console.log('Bronx');
+    e.preventDefault();
+    userSelection.text("You Selected Bronx");
   });
   $('#viewport').on('click', '#staten-island', function (e) {
-    e.preventDefault()
-    console.log('Staten Island');
+    e.preventDefault();
+    userSelection.text("You Selected Staten Island");
   });
 });
 
+// Add userSelection div to viewport
+var userSelection = $("<div class=userSelection>");
+$(".userSelection").empty();
+userSelection.text("Select A Borough");
+$("#viewport").prepend(userSelection);
+
+// Create global variables for map
 var centered, path, group, center, projection, areas,
     width = 700,
     height = 640;
@@ -40,7 +48,7 @@ d3.json('https://rawgit.com/dwillis/nyc-maps/master/boroughs.geojson', function 
   // Create and configure a geographic projection
   center = d3.geo.centroid(data)
   projection = d3.geo.mercator().scale(80000).center(center)
-                  .translate([1125/2, 650/2]);
+                  .translate([1125/2, 650/2])
 
   // Create and configure a path generator
   path = d3.geo.path().projection(projection);
@@ -53,7 +61,13 @@ d3.json('https://rawgit.com/dwillis/nyc-maps/master/boroughs.geojson', function 
               .attr('fill', '#222')
               .attr('stroke', '#fff')
               .attr('stroke-width', '1')
-              // .on('click', clicked);
+              .on('click', clicked)
+              .on('mouseover', function(){
+                d3.select(this).style({opacity:'0.7'})
+              })
+              .on('mouseout', function() {
+                d3.select(this).style({opacity:'1'})
+              });
 
   // Enter borough name in center of the borough
   group.append('text')
@@ -61,5 +75,32 @@ d3.json('https://rawgit.com/dwillis/nyc-maps/master/boroughs.geojson', function 
         .attr('y', function (d) {return path.centroid(d)[1]})
         .attr('text-anchor', "middle")
         .text(function (d) {return d.properties.BoroName})
+        .transition()
+        .duration(1100)
         .attr('fill', '#fff');
 });
+
+function clicked(d) {
+  var x, y, k;
+
+  if (d && centered !== d) {
+    var centroid = path.centroid(d);
+    x = centroid[0];
+    y = centroid[1];
+    k = 2;
+    centered = d;
+  } else {
+    x = width / 2;
+    y = height / 2;
+    k = 1;
+    centered = null;
+  }
+
+  group.selectAll("path")
+      .classed("active", centered && function(d) { return d === centered; });
+
+  group.transition()
+      .duration(750)
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+      .style("stroke-width", 1.5 / k + "px");
+}
