@@ -23,6 +23,7 @@ $(function () {
 });
 
 // Add userSelection div to viewport
+
 var userSelection = $("<div class=userSelection>");
 $(".userSelection").empty();
 userSelection.text("Select A Borough");
