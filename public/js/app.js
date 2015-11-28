@@ -34,12 +34,10 @@ $(function(){
 
   $session.on('click','#farms',function(e){
     e.preventDefault();
-    console.log('he')
     $.get('/farm',createArray,'JSON')
   })
   $session.on('click','#toilets',function(e){
     e.preventDefault();
-    console.log('hi')
     $.get('/toliet',createArray,'JSON')
   })
   $session.on('click','#payphone',function(){
@@ -51,13 +49,13 @@ $(function(){
     console.log()
   })
   $session.on('click','#button',function(){
-    console.log(this.text)
+    console.log(this)
   })
   var test = function(data){
     console.log('hello')
   }
   var createArray = function(data){
-    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{Borough:'Si',number :0,freq:0}]
+    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Si',number :0,freq:0}]
     for (var i = 0; i <data.length; i++){
       if (data[i].borough==='Brooklyn'){
         boroughData[0].number +=1
@@ -75,30 +73,48 @@ $(function(){
       borough2.freq=Math.floor(((borough2.number/data.length)*100))
     })
      $.post('/posts',{post:this.url,data:boroughData})
-     console.log('all done')
+     getWinner(boroughData)
   }
   var createArrayFromDl = function(data){
-    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{Borough:'Si',number :0,freq:0}]
-    for (var i = 0; i <data.data.length; i++){
-      if (data.data[i][35].toLowerCase()==='brooklyn'){
-        boroughData[0].number +=1
-      }else if(data.data[i][35].toLowerCase()==='queens'){
-        boroughData[1].number  +=1
-      }else if(data.data[i][35].toLowerCase()==='manhattan'){
-        boroughData[2].number  +=1
-      }else if(data.data[i][35].toLowerCase()==='bronx'){
-        boroughData[3].number  +=1
-      }else if(data.data[i][35].toLowerCase()==='staten island'){
-        boroughData[4].number  +=1
-      }
-    }
-    boroughData.forEach(function(borough2){
-      borough2.freq=Math.floor(((borough2.number/data.data.length)*100))
-    })
-     $.post('/posts',{post:this.url,data:boroughData})
+    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Si',number :0,freq:0}]
+    // for (var i = 0; i <data.data.length; i++){
+    //   if (data.data[i][35].toLowerCase()==='brooklyn'){
+    //     boroughData[0].number +=1
+    //   }else if(data.data[i][35].toLowerCase()==='queens'){
+    //     boroughData[1].number  +=1
+    //   }else if(data.data[i][35].toLowerCase()==='manhattan'){
+    //     boroughData[2].number  +=1
+    //   }else if(data.data[i][35].toLowerCase()==='bronx'){
+    //     boroughData[3].number  +=1
+    //   }else if(data.data[i][35].toLowerCase()==='staten island'){
+    //     boroughData[4].number  +=1
+    //   }
+    // }
+    // boroughData.forEach(function(borough2){
+    //   borough2.freq=Math.floor(((borough2.number/data.data.length)*100))
+    // })
+    //  $.post('/posts',{post:this.url,data:boroughData})
      console.log('all done')
     console.log(boroughData)
+    test3
   }
+
+  var getWinner =function(data){
+    console.log(data)
+    var result = 0
+    winner = []
+    for (var i=0; i<5; i++){
+      if (data[i].freq > result){
+        result = data[i].freq
+        winner = data[i].borough
+        winner =[]
+        winner.push(data[i].borough)
+      } else if (data[i].freq === result){
+        winner.push(data[i].borough)
+        }
+      }console.log(winner)
+    }
+
 
   var loggedOut = function () {
     var html = Handlebars.compile($("#login-view").html());
