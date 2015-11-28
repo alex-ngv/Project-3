@@ -21,34 +21,39 @@ $(function () {
   });
 });
 
+var centered, path, group, center, projection, areas,
+    width = 700,
+    height = 640;
+
 // setting up canvas
 var map_canvas = d3.select('#viewport').append('svg')
-            .attr('width', 960)
-            .attr('height', 650)
+            .attr('width', width)
+            .attr('height', height)
 
 // Getting geojson data and displaying it as an svg
 d3.json('https://rawgit.com/dwillis/nyc-maps/master/boroughs.geojson', function (data) {
-  var group = map_canvas.selectAll('g')
+  group = map_canvas.selectAll('g')
               .data(data.features)
               .enter()
               .append('g');
 
   // Create and configure a geographic projection
-  var center = d3.geo.centroid(data)
-  var projection = d3.geo.mercator().scale(70000).center(center)
-                  .translate([1600/2, 650/2]);
+  center = d3.geo.centroid(data)
+  projection = d3.geo.mercator().scale(80000).center(center)
+                  .translate([1125/2, 650/2]);
 
   // Create and configure a path generator
-  var path = d3.geo.path().projection(projection);
+  path = d3.geo.path().projection(projection);
 
   // appending path to group, setting class, id, and color
-  var areas = group.append('path')
+  areas = group.append('path')
               .attr('d', path )
               .attr('class', 'borough')
               .attr('id', function (d) {return d.properties.BoroName.toLowerCase().replace(/\s+/g, '-')})
               .attr('fill', '#222')
               .attr('stroke', '#fff')
-              .attr('stroke-width', '1');
+              .attr('stroke-width', '1')
+              // .on('click', clicked);
 
   // Enter borough name in center of the borough
   group.append('text')
