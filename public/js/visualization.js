@@ -1,9 +1,19 @@
 console.log("viz.js - donut!")
 
+
 $(function(){
-  finishStuff()
+  moveStuff()
+
+  $('.container').on('click','#farms',function(e){
+    e.preventDefault();
+    $.get('/farm',setDataVariables)
+  })
+
+
+
   $('#move').on('click', moveStuff)
   $('#finish').on('click', finishStuff)
+
 })
 
 var fakeData = [1]
@@ -13,6 +23,15 @@ var outerRadius = 300
 var innerRadius = 150
 var dataLabel = "Farmer's Market Share"
 
+
+var setDataVariables = function (d) {
+  console.log("Hi There b")
+  console.log(d)
+  realdata = d
+}
+
+
+
 var color = d3.scale.ordinal()
               .range(["cornflowerblue","red","orange","green","yellow"])
 
@@ -21,6 +40,8 @@ var canvas = d3.select('body').append('svg')
               .attr("height", 850)
               .style("border","5px ridge")
               .style("display","block")
+              .style("position","absolute")
+              .style("top","100px")
               .style("margin","auto");
 
 var group = canvas.append('g')
@@ -91,6 +112,23 @@ var circleText = circleTextG.selectAll('text')
 var finishStuff = function(){
   d3.selectAll('.arc').transition().duration(00).remove()
 
+}
+
+left = 11500
+var mufasa = function() {
+  var pony = $('#pony');
+  left = left - 10
+  $(pony).css("left", left + "px")
+  $(pony).css("top", "150px")
+  if (left < -120000) {
+    left = 120000
+  }
+};
+
+setInterval(mufasa,10)
+
+
+
 
   // arcs.append('path')
   //     .attr("d",arc)
@@ -100,7 +138,7 @@ var finishStuff = function(){
 
     //  dataLabel.style("fill","white")
 
-}
+
 
 
 // var man = canvas.append('path')
