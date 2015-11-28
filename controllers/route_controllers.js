@@ -28,5 +28,9 @@ module.exports.controller = function(app) {
       res.send(data)
     })
   });
-
+  app.get('/emergencyresponse/',authenticate,(req,res)=>{
+    api.emergencyResponse (function(data){
+      res.send(data)
+    })
+  });
 };
