@@ -31,14 +31,13 @@ $(function(){
     }).done(loggedOut)
   });
 
-
   $session.on('click','#farms',function(e){
     e.preventDefault();
-    $.get('/farm',createArray,'JSON')
+    $.get('/farm/',createArray,'JSON')
   })
   $session.on('click','#toilets',function(e){
     e.preventDefault();
-    $.get('/toliet',createArray,'JSON')
+    $.get('/toilet',createArray,'JSON')
   })
   $session.on('click','#payphone',function(){
     $.get('/payphone',createArrayFromDl,'JSON')
@@ -48,11 +47,16 @@ $(function(){
     $.get('/watercomplaints',createArrayFromDl,'JSON')
     console.log()
   })
+
   $session.on('click','#button',function(){
-    console.log(this)
+  //  console.log($( "#sel1 option:selected" ).text());
+  var test  = $( "#sel1 option:selected" ).text()
+  console.log(test)
+   $.get('/data/'+test)
+
   })
   var test = function(data){
-    console.log('hello')
+    console.log($('#wtf'))
   }
   var createArray = function(data){
     boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Si',number :0,freq:0}]
@@ -72,28 +76,28 @@ $(function(){
     boroughData.forEach(function(borough2){
       borough2.freq=Math.floor(((borough2.number/data.length)*100))
     })
-     $.post('/posts',{post:this.url,data:boroughData})
+     $.post('/data',{name:this.url,data:boroughData})
      getWinner(boroughData)
   }
   var createArrayFromDl = function(data){
     boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Si',number :0,freq:0}]
-    // for (var i = 0; i <data.data.length; i++){
-    //   if (data.data[i][35].toLowerCase()==='brooklyn'){
-    //     boroughData[0].number +=1
-    //   }else if(data.data[i][35].toLowerCase()==='queens'){
-    //     boroughData[1].number  +=1
-    //   }else if(data.data[i][35].toLowerCase()==='manhattan'){
-    //     boroughData[2].number  +=1
-    //   }else if(data.data[i][35].toLowerCase()==='bronx'){
-    //     boroughData[3].number  +=1
-    //   }else if(data.data[i][35].toLowerCase()==='staten island'){
-    //     boroughData[4].number  +=1
-    //   }
-    // }
-    // boroughData.forEach(function(borough2){
-    //   borough2.freq=Math.floor(((borough2.number/data.data.length)*100))
-    // })
-    //  $.post('/posts',{post:this.url,data:boroughData})
+    for (var i = 0; i <data.data.length; i++){
+      if (data.data[i][35].toLowerCase()==='brooklyn'){
+        boroughData[0].number +=1
+      }else if(data.data[i][35].toLowerCase()==='queens'){
+        boroughData[1].number  +=1
+      }else if(data.data[i][35].toLowerCase()==='manhattan'){
+        boroughData[2].number  +=1
+      }else if(data.data[i][35].toLowerCase()==='bronx'){
+        boroughData[3].number  +=1
+      }else if(data.data[i][35].toLowerCase()==='staten island'){
+        boroughData[4].number  +=1
+      }
+    }
+    boroughData.forEach(function(borough2){
+      borough2.freq=Math.floor(((borough2.number/data.data.length)*100))
+    })
+     $.post('/posts',{post:this.url,data:boroughData})
      console.log('all done')
     console.log(boroughData)
     test3
@@ -154,7 +158,7 @@ $(function(){
 
   $(function(){
 
-
+    moveStuff()
     $('.container').on('click','#toilets',function(e){
       e.preventDefault();
       setTimeout(function(){realdata = boroughData;moveStuff()},1500)
@@ -170,8 +174,8 @@ $(function(){
   var fakeData = [1]
   var data = [15,25,35,45]
   var realdata = [{borough:"Brooklyn",number:35},{borough:"Queens",number:11},{borough:"Manhattan",number:28},{borough:"Bronx",number:22},{borough:"Si",number:1}]
-  var outerRadius = 300
-  var innerRadius = 150
+  var outerRadius = 250
+  var innerRadius = 80
   var dataLabel = "Farmer's Market Share"
 
 
@@ -181,22 +185,21 @@ $(function(){
     realdata = d
   }
 
-
-
   var color = d3.scale.ordinal()
                 .range(["#3498db","#e74c3c","#95a5a6","#f1c40f","#2ecc71"])
 
   var canvas = d3.select('body').append('svg')
-                .attr("width", 1000)
-                .attr("height", 850)
-                .style("border","5px ridge")
+                .attr("width", 675)
+                .attr("height", 600)
+                //.style("border","5px ridge")
                 .style("display","block")
                 .style("position","absolute")
                 .style("top","100px")
+                .style("right","40px")
                 .style("margin","auto");
 
   var group = canvas.append('g')
-                    .attr("transform","translate(400,500)")
+                    .attr("transform","translate(250,300)")
 
   var arc = d3.svg.arc()
               .innerRadius(innerRadius)
@@ -204,9 +207,6 @@ $(function(){
 
   var donut = d3.layout.pie()
                 .value(function(d){return d.number})
-
-
-
 
 
   var moveStuff = function(){
@@ -229,14 +229,14 @@ $(function(){
         .text(function(d){return d.data.number})
         .attr("font-size","2em")
 
-  var textLabel = arcs.append('text')
-                      .attr("transform","translate(-125,-400)")
-                      .style('fill','white')
-                      .transition()
-                      .duration(400)
-                      .text(dataLabel)
-                      .style('fill','black')
-                      .attr("font-size","1.7em")
+  // var textLabel = arcs.append('text')
+  //                     .attr("transform","translate(-125,-400)")
+  //                     .style('fill','white')
+  //                     .transition()
+  //                     .duration(400)
+  //                     .text(dataLabel)
+  //                     .style('fill','black')
+  //                     .attr("font-size","1.7em")
 
   labelG = canvas.append('g')
 
@@ -245,7 +245,7 @@ $(function(){
         .enter()
         .append('circle')
         .attr("r","15")
-        .attr("transform",function(d,i){return "translate(750," +(i*40+100)+ ")"})
+        .attr("transform",function(d,i){return "translate(550," +(i*40+70)+ ")"})
         .attr("fill",function(d){return color(d.number)})
 
   circleTextG = canvas.append('g')
@@ -255,7 +255,7 @@ $(function(){
             .enter()
             .append('text')
             .text(function(d){return d.borough})
-            .attr("transform",function(d,i){return "translate(775," +(i*40+107)+ ")"})
+            .attr("transform",function(d,i){return "translate(575," +(i*40+77)+ ")"})
             .style("font-size","1.3em")
 
    }
@@ -269,19 +269,19 @@ $(function(){
 
 var mufasa = canvas.append("image")
                 .attr("xlink:href", "http://dash.ponychan.net/chan/files/src/136167943291.gif")
-                .attr("x", 1800)
+                .attr("x", 1080)
                 .attr("y", 20)
                 .attr("width", 10)
                 .attr("height", 10)
                 .transition()
-                .delay(11000)
-                .duration(3000)
+                .delay(21000)
+                .duration(2000)
                 .attr("x",0)
                 .attr("y",0)
                 .attr("width", 560)
                 .attr("height", 560)
                 .transition()
-                .duration(700)
+                .duration(500)
                 .attr("width", 0)
                 .attr("height", 0)
 
