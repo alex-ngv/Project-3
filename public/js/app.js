@@ -154,7 +154,7 @@ $(function(){
 
   $(function(){
 
-
+    moveStuff()
     $('.container').on('click','#toilets',function(e){
       e.preventDefault();
       setTimeout(function(){realdata = boroughData;moveStuff()},1500)
@@ -170,8 +170,8 @@ $(function(){
   var fakeData = [1]
   var data = [15,25,35,45]
   var realdata = [{borough:"Brooklyn",number:35},{borough:"Queens",number:11},{borough:"Manhattan",number:28},{borough:"Bronx",number:22},{borough:"Si",number:1}]
-  var outerRadius = 300
-  var innerRadius = 150
+  var outerRadius = 250
+  var innerRadius = 80
   var dataLabel = "Farmer's Market Share"
 
 
@@ -187,16 +187,17 @@ $(function(){
                 .range(["#3498db","#e74c3c","#95a5a6","#f1c40f","#2ecc71"])
 
   var canvas = d3.select('body').append('svg')
-                .attr("width", 1000)
-                .attr("height", 850)
-                .style("border","5px ridge")
+                .attr("width", 675)
+                .attr("height", 600)
+                //.style("border","5px ridge")
                 .style("display","block")
                 .style("position","absolute")
                 .style("top","100px")
+                .style("right","40px")
                 .style("margin","auto");
 
   var group = canvas.append('g')
-                    .attr("transform","translate(400,500)")
+                    .attr("transform","translate(250,300)")
 
   var arc = d3.svg.arc()
               .innerRadius(innerRadius)
@@ -229,14 +230,14 @@ $(function(){
         .text(function(d){return d.data.number})
         .attr("font-size","2em")
 
-  var textLabel = arcs.append('text')
-                      .attr("transform","translate(-125,-400)")
-                      .style('fill','white')
-                      .transition()
-                      .duration(400)
-                      .text(dataLabel)
-                      .style('fill','black')
-                      .attr("font-size","1.7em")
+  // var textLabel = arcs.append('text')
+  //                     .attr("transform","translate(-125,-400)")
+  //                     .style('fill','white')
+  //                     .transition()
+  //                     .duration(400)
+  //                     .text(dataLabel)
+  //                     .style('fill','black')
+  //                     .attr("font-size","1.7em")
 
   labelG = canvas.append('g')
 
@@ -245,7 +246,7 @@ $(function(){
         .enter()
         .append('circle')
         .attr("r","15")
-        .attr("transform",function(d,i){return "translate(750," +(i*40+100)+ ")"})
+        .attr("transform",function(d,i){return "translate(550," +(i*40+70)+ ")"})
         .attr("fill",function(d){return color(d.number)})
 
   circleTextG = canvas.append('g')
@@ -255,7 +256,7 @@ $(function(){
             .enter()
             .append('text')
             .text(function(d){return d.borough})
-            .attr("transform",function(d,i){return "translate(775," +(i*40+107)+ ")"})
+            .attr("transform",function(d,i){return "translate(575," +(i*40+77)+ ")"})
             .style("font-size","1.3em")
 
    }
@@ -269,19 +270,19 @@ $(function(){
 
 var mufasa = canvas.append("image")
                 .attr("xlink:href", "http://dash.ponychan.net/chan/files/src/136167943291.gif")
-                .attr("x", 1800)
+                .attr("x", 1080)
                 .attr("y", 20)
                 .attr("width", 10)
                 .attr("height", 10)
                 .transition()
-                .delay(11000)
-                .duration(3000)
+                .delay(21000)
+                .duration(2000)
                 .attr("x",0)
                 .attr("y",0)
                 .attr("width", 560)
                 .attr("height", 560)
                 .transition()
-                .duration(700)
+                .duration(500)
                 .attr("width", 0)
                 .attr("height", 0)
 
