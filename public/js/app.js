@@ -185,7 +185,7 @@ $(function(){
     var mapSVG = $('#viewport').children()
     $(mapSVG[0]).on('click',function(e){
       e.preventDefault();
-      setTimeout(function(){moveStuff()},1500)
+      setTimeout(function(){ pullData()},200)
     })
 
     $('.container').on('click','#button',function(e){
@@ -195,19 +195,25 @@ $(function(){
 
   })
 
-  var boroughData = []
+//  var boroughData = []
   var outerRadius = 250
   var innerRadius = 110
 
 
-  var setDataVariables = function (d) {
-    console.log("Hi There b")
-    console.log(d)
-    boroughData = d
+  var pullData = function () {
+    var test  = $( "#sel1 option:selected" )[0].id
+    $.get('/data/'+test).done(seedData)
+  }
+
+  var seedData = function (d) {
+    boroughData = d[0].data
+    moveStuff()
   }
 
 
   var moveStuff = function(){
+
+        $(".data-vis").remove()
 
         var color = d3.scale.ordinal()
                 .range(["#3498db","#e74c3c","#95a5a6","#f1c40f","#2ecc71"])
@@ -221,6 +227,7 @@ $(function(){
                 .style("top","160px")
                 .style("right","40px")
                 .style("margin","auto")
+                .attr("class","data-vis")
 
         var group = canvas.append('g')
                 .attr("transform","translate(250,260)")
