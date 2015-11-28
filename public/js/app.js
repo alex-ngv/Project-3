@@ -187,7 +187,6 @@ $(function(){
 
 
 
-<<<<<<< HEAD
   var color = d3.scale.ordinal()
                 .range(["#3498db","#e74c3c","#95a5a6","#f1c40f","#2ecc71"])
 
@@ -210,31 +209,28 @@ $(function(){
 
   var donut = d3.layout.pie()
                 .value(function(d){return d.number})
-=======
-  // var color = d3.scale.ordinal()
-  //               .range(["#3498db","#e74c3c","#95a5a6","#f1c40f","#2ecc71"])
-  //
-  // var canvas = d3.select('body').append('svg')
-  //               .attr("width", 1000)
-  //               .attr("height", 850)
-  //               .style("border","5px ridge")
-  //               .style("display","block")
-  //               .style("position","absolute")
-  //               .style("top","100px")
-  //               .style("margin","auto");
-  //
-  // var group = canvas.append('g')
-  //                   .attr("transform","translate(400,500)")
-  //
-  // var arc = d3.svg.arc()
-  //             .innerRadius(innerRadius)
-  //             .outerRadius(outerRadius)
-  //
-  // var donut = d3.layout.pie()
-  //               .value(function(d){return d.number})
->>>>>>> 1f33d8e2c633799e1bd34da55ce00e6d3123e169
 
+  var color = d3.scale.ordinal()
+                .range(["#3498db","#e74c3c","#95a5a6","#f1c40f","#2ecc71"])
 
+  var canvas = d3.select('body').append('svg')
+                .attr("width", 1000)
+                .attr("height", 850)
+                .style("border","5px ridge")
+                .style("display","block")
+                .style("position","absolute")
+                .style("top","100px")
+                .style("margin","auto");
+
+  var group = canvas.append('g')
+                    .attr("transform","translate(400,500)")
+
+  var arc = d3.svg.arc()
+              .innerRadius(innerRadius)
+              .outerRadius(outerRadius)
+
+  var donut = d3.layout.pie()
+                .value(function(d){return d.number})
 
 
 
