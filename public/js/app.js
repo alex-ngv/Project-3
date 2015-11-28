@@ -55,8 +55,8 @@ $(function(){
   var test  = $( "#sel1 option:selected" )[0].id
    $.get('/data/'+test)
   console.log(test)
-
   })
+
   // var test = function(data){
   //   console.log($('#wtf'))
   // }

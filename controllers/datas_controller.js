@@ -7,6 +7,7 @@ module.exports.controller = function(app) {
     // res.send(console.log(req.params.question))
     Data.find({name:req.params.question}).exec(function(err,data){
       console.log(data)
+      res.send(data)
     })
   });
 
