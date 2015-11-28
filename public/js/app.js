@@ -31,14 +31,13 @@ $(function(){
     }).done(loggedOut)
   });
 
-
   $session.on('click','#farms',function(e){
     e.preventDefault();
-    $.get('/farm',createArray,'JSON')
+    $.get('/farm/',createArray,'JSON')
   })
   $session.on('click','#toilets',function(e){
     e.preventDefault();
-    $.get('/toliet',createArray,'JSON')
+    $.get('/toilet',createArray,'JSON')
   })
   $session.on('click','#payphone',function(){
     $.get('/payphone',createArrayFromDl,'JSON')
@@ -48,11 +47,16 @@ $(function(){
     $.get('/watercomplaints',createArrayFromDl,'JSON')
     console.log()
   })
+
   $session.on('click','#button',function(){
-    console.log(this)
+  //  console.log($( "#sel1 option:selected" ).text());
+  var test  = $( "#sel1 option:selected" ).text()
+  console.log(test)
+   $.get('/data/'+test)
+
   })
   var test = function(data){
-    console.log('hello')
+    console.log($('#wtf'))
   }
   var createArray = function(data){
     boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Si',number :0,freq:0}]
@@ -72,28 +76,28 @@ $(function(){
     boroughData.forEach(function(borough2){
       borough2.freq=Math.floor(((borough2.number/data.length)*100))
     })
-     $.post('/posts',{post:this.url,data:boroughData})
+     $.post('/data',{name:this.url,data:boroughData})
      getWinner(boroughData)
   }
   var createArrayFromDl = function(data){
     boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Si',number :0,freq:0}]
-    // for (var i = 0; i <data.data.length; i++){
-    //   if (data.data[i][35].toLowerCase()==='brooklyn'){
-    //     boroughData[0].number +=1
-    //   }else if(data.data[i][35].toLowerCase()==='queens'){
-    //     boroughData[1].number  +=1
-    //   }else if(data.data[i][35].toLowerCase()==='manhattan'){
-    //     boroughData[2].number  +=1
-    //   }else if(data.data[i][35].toLowerCase()==='bronx'){
-    //     boroughData[3].number  +=1
-    //   }else if(data.data[i][35].toLowerCase()==='staten island'){
-    //     boroughData[4].number  +=1
-    //   }
-    // }
-    // boroughData.forEach(function(borough2){
-    //   borough2.freq=Math.floor(((borough2.number/data.data.length)*100))
-    // })
-    //  $.post('/posts',{post:this.url,data:boroughData})
+    for (var i = 0; i <data.data.length; i++){
+      if (data.data[i][35].toLowerCase()==='brooklyn'){
+        boroughData[0].number +=1
+      }else if(data.data[i][35].toLowerCase()==='queens'){
+        boroughData[1].number  +=1
+      }else if(data.data[i][35].toLowerCase()==='manhattan'){
+        boroughData[2].number  +=1
+      }else if(data.data[i][35].toLowerCase()==='bronx'){
+        boroughData[3].number  +=1
+      }else if(data.data[i][35].toLowerCase()==='staten island'){
+        boroughData[4].number  +=1
+      }
+    }
+    boroughData.forEach(function(borough2){
+      borough2.freq=Math.floor(((borough2.number/data.data.length)*100))
+    })
+     $.post('/posts',{post:this.url,data:boroughData})
      console.log('all done')
     console.log(boroughData)
     test3
@@ -183,6 +187,7 @@ $(function(){
 
 
 
+<<<<<<< HEAD
   var color = d3.scale.ordinal()
                 .range(["#3498db","#e74c3c","#95a5a6","#f1c40f","#2ecc71"])
 
@@ -205,6 +210,29 @@ $(function(){
 
   var donut = d3.layout.pie()
                 .value(function(d){return d.number})
+=======
+  // var color = d3.scale.ordinal()
+  //               .range(["#3498db","#e74c3c","#95a5a6","#f1c40f","#2ecc71"])
+  //
+  // var canvas = d3.select('body').append('svg')
+  //               .attr("width", 1000)
+  //               .attr("height", 850)
+  //               .style("border","5px ridge")
+  //               .style("display","block")
+  //               .style("position","absolute")
+  //               .style("top","100px")
+  //               .style("margin","auto");
+  //
+  // var group = canvas.append('g')
+  //                   .attr("transform","translate(400,500)")
+  //
+  // var arc = d3.svg.arc()
+  //             .innerRadius(innerRadius)
+  //             .outerRadius(outerRadius)
+  //
+  // var donut = d3.layout.pie()
+  //               .value(function(d){return d.number})
+>>>>>>> 1f33d8e2c633799e1bd34da55ce00e6d3123e169
 
 
 
