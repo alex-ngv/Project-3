@@ -215,6 +215,7 @@ $(function(){
 
         $(".data-vis").remove()
         $(".winner-div").remove()
+        $(".gulls ").remove()
 
         var color = d3.scale.ordinal()
                 .range(["#3498db","#e74c3c","#95a5a6","#f1c40f","#2ecc71"])
@@ -225,7 +226,7 @@ $(function(){
                 //.style("border","5px ridge")
                 .style("display","block")
                 .style("position","absolute")
-                .style("top","320px")
+                .style("top","270px")
                 .style("right","30px")
                 .style("margin","auto")
                 .attr("class","data-vis")
@@ -282,14 +283,14 @@ $(function(){
 
         var winnerDiv = $('<div class=winner-div>')
             winnerDiv.css('position','absolute')
-            winnerDiv.css('top','242px')
-            winnerDiv.width('700')
+            winnerDiv.css('top','160px')
+            winnerDiv.width('680')
             winnerDiv.height('50')
             winnerDiv.css('right','30px')
             winnerDiv.css('border-radius',"8px")
             //winnerDiv.css("border","5px ridge")  nobody likes my awesome boder!
             $('body').append(winnerDiv)
-            winnerDiv.css('font-size','1.5em')
+            winnerDiv.css('font-size','1.7em')
             winnerDiv.css('text-align',"center")
             winnerDiv.html("The borough with the most " + $("#sel1 option:selected")[0].text.toLowerCase() + " is " + winnerData)
 
@@ -320,9 +321,10 @@ $(function(){
   }
 
   var gullible = function () {
-    var frame = $('<iframe width="675" height="550" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" frameborder="0" allowfullscreen></iframe>').appendTo('body');
+    $(".data-vis").remove()
+    var frame = $('<iframe class="gulls" width="695" height="630" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" frameborder="0" allowfullscreen></iframe>').appendTo('body');
     frame.css("position","absolute")
-    frame.css("top","250px")
+    frame.css("top","180px")
     frame.css("right","30px")
   }
 
