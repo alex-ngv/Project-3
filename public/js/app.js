@@ -61,7 +61,7 @@ $(function(){
   //   console.log($('#wtf'))
   // }
   var createArray = function(data){
-    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Si',number :0,freq:0}]
+    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Staten Island',number :0,freq:0}]
     for (var i = 0; i <data.length; i++){
       if (data[i].borough==='Brooklyn'){
         boroughData[0].number +=1
@@ -82,7 +82,7 @@ $(function(){
      getWinner(boroughData)
   }
   var createArrayFromDl = function(data){
-    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Si',number :0,freq:0}]
+    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Staten Island',number :0,freq:0}]
     for (var i = 0; i <data.data.length; i++){
       if (data.data[i][35].toLowerCase()==='brooklyn'){
         boroughData[0].number +=1
@@ -104,7 +104,7 @@ $(function(){
   }
 
   var createArrayFromDlE = function(data){
-    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Si',number :0,freq:0}]
+    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Staten Island',number :0,freq:0}]
     console.log(data.data[0][10].toLowerCase())
     for (var i = 0; i <data.data.length; i++){
       if (data.data[i][10]===null){
