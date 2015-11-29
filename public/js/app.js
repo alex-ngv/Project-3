@@ -61,7 +61,7 @@ $(function(){
   //   console.log($('#wtf'))
   // }
   var createArray = function(data){
-    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Si',number :0,freq:0}]
+    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Staten Island',number :0,freq:0}]
     for (var i = 0; i <data.length; i++){
       if (data[i].borough==='Brooklyn'){
         boroughData[0].number +=1
@@ -82,7 +82,7 @@ $(function(){
      getWinner(boroughData)
   }
   var createArrayFromDl = function(data){
-    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Si',number :0,freq:0}]
+    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Staten Island',number :0,freq:0}]
     for (var i = 0; i <data.data.length; i++){
       if (data.data[i][35].toLowerCase()==='brooklyn'){
         boroughData[0].number +=1
@@ -104,7 +104,7 @@ $(function(){
   }
 
   var createArrayFromDlE = function(data){
-    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Si',number :0,freq:0}]
+    boroughData = [{borough:'Brooklyn',number:0, freq:0},{borough:'Queens',number:0,freq:0},{borough:'Manhattan',number:0,freq:0},{borough:'Bronx',number:0,freq:0},{borough:'Staten Island',number :0,freq:0}]
     console.log(data.data[0][10].toLowerCase())
     for (var i = 0; i <data.data.length; i++){
       if (data.data[i][10]===null){
@@ -174,26 +174,25 @@ $(function(){
 
 
 
-
-
 //Yuriy stuff starts here but Alex's onload function closes at the end!
   console.log("viz.js - donut!")
 
 
   $(function(){
+    var mapSVG = $('#viewport').children();
 
-    var mapSVG = $('#viewport').children()
-    $(mapSVG[0]).on('click',function(e){
-      e.preventDefault();
-      setTimeout(function(){ pullData()},200)
+      $(mapSVG[0]).on('click',function(e){
+        if ($( "#sel1 option:selected" )[0].id === "gullible"){
+        e.preventDefault();
+        gullible()
+        }else{
+        e.preventDefault();
+        setTimeout(function(){ pullData()},200)
+      }
     })
-
-    $('.container').on('click','#button',function(e){
-      e.preventDefault();
-      gullible()
-    })
-
   })
+
+
 
 //  var boroughData = []
   var outerRadius = 250
@@ -207,6 +206,7 @@ $(function(){
 
   var seedData = function (d) {
     boroughData = d[0].data
+    winnerData = d[0].winner
     moveStuff()
   }
 
@@ -214,6 +214,7 @@ $(function(){
   var moveStuff = function(){
 
         $(".data-vis").remove()
+        $(".winner-div").remove()
 
         var color = d3.scale.ordinal()
                 .range(["#3498db","#e74c3c","#95a5a6","#f1c40f","#2ecc71"])
@@ -224,8 +225,8 @@ $(function(){
                 //.style("border","5px ridge")
                 .style("display","block")
                 .style("position","absolute")
-                .style("top","160px")
-                .style("right","40px")
+                .style("top","320px")
+                .style("right","30px")
                 .style("margin","auto")
                 .attr("class","data-vis")
 
@@ -248,7 +249,7 @@ $(function(){
 
         arcs.append('path')
             .transition()
-            .duration(1500)
+            .duration(500)
             .attr("d",arc)
             .attr("fill",function(d){return color(d.data.number)})
 
@@ -265,7 +266,7 @@ $(function(){
               .enter()
               .append('circle')
               .attr("r","15")
-              .attr("transform",function(d,i){return "translate(550," +(i*40+70)+ ")"})
+              .attr("transform",function(d,i){return "translate(550," +(i*40+50)+ ")"})
               .attr("fill",function(d){return color(d.number)})
 
         circleTextG = canvas.append('g')
@@ -275,8 +276,22 @@ $(function(){
                   .enter()
                   .append('text')
                   .text(function(d){return d.borough})
-                  .attr("transform",function(d,i){return "translate(575," +(i*40+77)+ ")"})
+                  .attr("transform",function(d,i){return "translate(575," +(i*40+57)+ ")"})
                   .style("font-size","1.3em")
+
+
+        var winnerDiv = $('<div class=winner-div>')
+            winnerDiv.css('position','absolute')
+            winnerDiv.css('top','242px')
+            winnerDiv.width('700')
+            winnerDiv.height('50')
+            winnerDiv.css('right','30px')
+            winnerDiv.css('border-radius',"8px")
+            //winnerDiv.css("border","5px ridge")  nobody likes my awesome boder!
+            $('body').append(winnerDiv)
+            winnerDiv.css('font-size','1.5em')
+            winnerDiv.css('text-align',"center")
+            winnerDiv.html("The borough with the most " + $("#sel1 option:selected")[0].text.toLowerCase() + " is " + winnerData)
 
 
     var mufasa = canvas.append("image")
@@ -286,7 +301,7 @@ $(function(){
                 .attr("width", 10)
                 .attr("height", 10)
                 .transition()
-                .delay(2000)
+                .delay(32000)
                 .duration(2000)
                 .attr("x",0)
                 .attr("y",0)
@@ -307,8 +322,8 @@ $(function(){
   var gullible = function () {
     var frame = $('<iframe width="675" height="550" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" frameborder="0" allowfullscreen></iframe>').appendTo('body');
     frame.css("position","absolute")
-    frame.css("top","160px")
-    frame.css("right","40px")
+    frame.css("top","250px")
+    frame.css("right","30px")
   }
 
 
