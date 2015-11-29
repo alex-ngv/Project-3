@@ -1,32 +1,33 @@
 $(function () {
 
-  $('#viewport').on('click', '#manhattan', function (e) {
-    e.preventDefault();
-    userSelection.text("You Selected Manhattan");
-  });
-  $('#viewport').on('click', '#brooklyn', function (e) {
-    e.preventDefault();
-    userSelection.text("You Selected Brooklyn");
-  });
-  $('#viewport').on('click', '#queens', function (e) {
-    e.preventDefault();
-    userSelection.text("You Selected Queens");
-  });
-  $('#viewport').on('click', '#bronx', function (e) {
-    e.preventDefault();
-    userSelection.text("You Selected Bronx");
-  });
-  $('#viewport').on('click', '#staten-island', function (e) {
-    e.preventDefault();
-    userSelection.text("You Selected Staten Island");
-  });
+  // $('#viewport').on('click', '#manhattan', function (e) {
+  //   e.preventDefault();
+  //   userSelection.text("You Selected Manhattan");
+  // });
+  // $('#viewport').on('click', '#brooklyn', function (e) {
+  //   e.preventDefault();
+  //   userSelection.text("You Selected Brooklyn");
+  // });
+  // $('#viewport').on('click', '#queens', function (e) {
+  //   e.preventDefault();
+  //   userSelection.text("You Selected Queens");
+  // });
+  // $('#viewport').on('click', '#bronx', function (e) {
+  //   e.preventDefault();
+  //   userSelection.text("You Selected Bronx");
+  // });
+  // $('#viewport').on('click', '#staten-island', function (e) {
+  //   e.preventDefault();
+  //   userSelection.text("You Selected Staten Island");
+  // });
 });
 
 // Add userSelection div to viewport
-var userSelection = $("<div class=userSelection>");
-$(".userSelection").empty();
-userSelection.text("Select A Borough");
-$("#viewport").prepend(userSelection);
+
+// var userSelection = $("<div class=userSelection>");
+// $(".userSelection").empty();
+// userSelection.text("Select A Borough");
+// $("#viewport").prepend(userSelection);
 
 // Create global variables for map
 var centered, path, group, center, projection, areas,
@@ -99,8 +100,20 @@ function clicked(d) {
   group.selectAll("path")
       .classed("active", centered && function(d) { return d === centered; });
 
+
+
+  setTimeout(function() {
+    d3.selectAll(".borough")
+      .classed("active", false);
+  }, 4500);
+
   group.transition()
       .duration(750)
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-      .style("stroke-width", 1.5 / k + "px");
+      .style("stroke-width", 1.5 / k + "px")
+      .transition()
+        .delay(3000)
+        .duration(1300)
+        .attr("transform", "translate(" + 750 + "," + 640 + ")scale(" + 1 + ")translate(" + -750 + "," + -640 + ")")
+        .attr('class', 'borough')
 }

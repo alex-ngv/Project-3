@@ -12,13 +12,13 @@ $(function(){
     e.preventDefault()
     $usernameField = $('#inputUserame').val()
     $passwordField = $('#inputPassword').val()
-    console.log($usernameField)
     $.post('/sessions' , {name:$usernameField, password:$passwordField},assignSession,'JSON')
   })
 
   $session.on('click','#newAccount',function(e){
     e.preventDefault()
-    console.log('hihihihi')
+    $usernameField = $('#inputUserame').val()
+    $passwordField = $('#inputPassword').val()
     $.post('/users', {name:$usernameField, password:$passwordField},newAccountCreated,'JSON')
   });
 
@@ -55,8 +55,8 @@ $(function(){
   var test  = $( "#sel1 option:selected" )[0].id
    $.get('/data/'+test)
   console.log(test)
-
   })
+
   // var test = function(data){
   //   console.log($('#wtf'))
   // }
