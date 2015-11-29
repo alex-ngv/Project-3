@@ -226,7 +226,7 @@ $(function(){
                 //.style("border","5px ridge")
                 .style("display","block")
                 .style("position","absolute")
-                .style("top","270px")
+                .style("top","280px")
                 .style("right","30px")
                 .style("margin","auto")
                 .attr("class","data-vis")
@@ -283,7 +283,7 @@ $(function(){
 
         var winnerDiv = $('<div class=winner-div>')
             winnerDiv.css('position','absolute')
-            winnerDiv.css('top','160px')
+            winnerDiv.css('top','210px')
             winnerDiv.width('680')
             winnerDiv.height('50')
             winnerDiv.css('right','30px')
