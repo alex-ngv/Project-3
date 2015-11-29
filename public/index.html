@@ -31,41 +31,14 @@
         <label for="exampleInputPassword">Password</label>
         <input type="password" class="form-control" id="inputPassword" placeholder="password">
       </div>
-      <button type="submit" class="btn btn-default" id="loginButton">Sign In</button>
-      <a class="btn btn-primary btn" href="#" role="button" id='newAccount'>New Account</a>
+      <button type="submit" class="btn btn-default" id="loginButton">Sign In</button> or
+      <button type="submit" class="btn btn-primary btn" id='newAccount'>Create New Account</button>
     </form>
   </div>
 <br>
 
-<template id="buttons" type="text/x-handlebars-template">
-  <div class="user">
-      <br>
-      <p id="loggedInUser">Welcome {{name}}!</p>
-      <button type="button" class="btn btn-danger btn-sm" id="logout">Logout</button><hr>
-    <div class="form-group">
-      <label for="sel1">Which borough do you think has the most?</label>
-      <select class="form-control" id="sel1">
-        <option id='toilet'>Public Toilets</option>
-        <option id='farm'>Farmer's Markets</option>
-        <option id='payphone'>Public Payphone Complaints</option>
-        <option id='water'>Water Complaints</option>
-        <option id='emergency'>Emergency Response</option>
-      </select>
-    </div>
-    <a class="btn btn-default" id="button" role="button">BUTTON</a>
-    <a class="btn btn-default" id="farms" role="button">Farms</a>
-    <a class="btn btn-default" id="toilets" role="button">Toilets</a>
-    <a class="btn btn-default" id="payphone" role="button">PayphoneCompl</a>
-    <a class="btn btn-default" id="water" role="button">WaterCompl</a>
-    <a class="btn btn-default" id="emergency" role="button">Emergency Responses</a>
-  </div>
-
-
-
-</template>
-
   <template id="login-view" type="text/x-handlebars-template">
-    <div>
+    <div class ="container">
       <br>
       <form class="form-inline">
         <div class="form-group">
@@ -79,6 +52,31 @@
         <button type="submit" class="btn btn-default" id="loginButton">Sign In</button>
         <a class="btn btn-primary btn" href="#" role="button" id='newAccount'>New Account</a>
       </form>
+    </div>
+  </template>
+
+  <template id="buttons" type="text/x-handlebars-template">
+  <div class="user">
+      <br>
+      <p id="loggedInUser">Welcome {{name}}!</p>
+      <button type="button" class="btn btn-danger btn-sm" id="logout">Logout</button><hr>
+    <div class="form-group">
+      <h1 for="sel1">Select a borough on the map which you think has the most...</h1>
+      <select class="form-control" id="sel1">
+        <option id='payphone'>Public Payphone Complaints 2010 to Present</option>
+        <option id='toilet'>Public Toilets</option>
+        <option id='farm'>Farmer's Markets</option>
+        <option id='water'>Water Quality Complaints 2010 to Present</option>
+        <option id='emergency'>Emergency Response Incidents in 2015</option>
+        <option id='gullible'>Had the most gullible residents in 1987</option>
+      </select>
+    </div>
+    <!-- <a class="btn btn-default" id="button" role="button">BUTTON</a>
+    <a class="btn btn-default" id="farms" role="button">Farms</a>
+    <a class="btn btn-default" id="toilets" role="button">Toilets</a>
+    <a class="btn btn-default" id="payphone" role="button">PayphoneCompl</a>
+    <a class="btn btn-default" id="water" role="button">WaterCompl</a>
+    <a class="btn btn-default" id="emergency" role="button">Emergency Responses</a> -->
     </div>
   </template>
 
