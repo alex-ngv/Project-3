@@ -20,7 +20,6 @@ $(function () {
   //   e.preventDefault();
   //   userSelection.text("You Selected Staten Island");
   // });
-});
 
 // Add userSelection div to viewport
 
@@ -117,3 +116,5 @@ function clicked(d) {
         .attr("transform", "translate(" + 750 + "," + 640 + ")scale(" + 1 + ")translate(" + -750 + "," + -640 + ")")
         .attr('class', 'borough')
 }
+
+});
