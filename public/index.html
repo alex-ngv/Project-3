@@ -57,19 +57,21 @@
 
   <template id="buttons" type="text/x-handlebars-template">
   <div class="user">
+
       <p>
         Logged in as {{name}}
       <button type="button" class="btn btn-default btn-xs" id="logout">Logout</button>
       </p>
+
     <div class="form-group">
       <h2 for="sel1">Select a borough on the map which you think has the most...</h2>
       <select class="form-control" id="sel1">
-        <option id='payphone'>Public Payphone Complaints 2010 to Present</option>
+        <option id='payphone'>Public Payphone Complaints (2010 to Present)</option>
         <option id='toilet'>Public Toilets</option>
         <option id='farm'>Farmer's Markets</option>
-        <option id='water'>Water Quality Complaints 2010 to Present</option>
+        <option id='water'>Water Quality Complaints (2010 to Present)</option>
         <option id='emergency'>Emergency Response Incidents in 2015</option>
-        <option id='gullible'>Had the most gullible residents in 1987</option>
+        <option id='gullible'>Gullible residents</option>
       </select>
     </div>
     <!-- <a class="btn btn-default" id="button" role="button">BUTTON</a>

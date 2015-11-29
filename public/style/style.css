@@ -2,6 +2,19 @@
   font-family: 'Karla', sans-serif;
 }
 
+/***************** index.html *****************/
+#loggedInUser {
+  text-transform: capitalize;
+  font-size: 1.5em;
+  display: inline-block;
+  /*float: right;*/
+}
+
+#logout {
+  display: inline-block;
+  margin-left: 5px;
+  float: right;
+}
 
 /***************** map.js - Sho *****************/
 .active {
