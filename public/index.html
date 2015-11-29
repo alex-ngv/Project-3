@@ -38,26 +38,26 @@
 <br>
 
 <template id="buttons" type="text/x-handlebars-template">
-<div class="user">
-    <br>
-    Logged in as {{name}}
-    <button type="button" class="btn btn-default btn-xs" id="logout">Logout</button>
-  <div class="form-group">
-    <label for="sel1">Which borough do you think has the most?</label>
-    <select class="form-control" id="sel1">
-      <option id='toilet'>Public Toilets</option>
-      <option id='farm'>Farmer's Markets</option>
-      <option id='payphone'>Public Payphone Complaints</option>
-      <option id='water'>Water Complaints</option>
-      <option id='emergency'>Emergency Response</option>
-    </select>
-  </div>
-  <a class="btn btn-default" id="button" role="button">BUTTON</a>
-  <a class="btn btn-default" id="farms" role="button">Farms</a>
-  <a class="btn btn-default" id="toilets" role="button">Toilets</a>
-  <a class="btn btn-default" id="payphone" role="button">PayphoneCompl</a>
-  <a class="btn btn-default" id="water" role="button">WaterCompl</a>
-  <a class="btn btn-default" id="emergency" role="button">Emergency Responses</a>
+  <div class="user">
+      <br>
+      <p id="loggedInUser">Welcome {{name}}!</p>
+      <button type="button" class="btn btn-danger btn-sm" id="logout">Logout</button><hr>
+    <div class="form-group">
+      <label for="sel1">Which borough do you think has the most?</label>
+      <select class="form-control" id="sel1">
+        <option id='toilet'>Public Toilets</option>
+        <option id='farm'>Farmer's Markets</option>
+        <option id='payphone'>Public Payphone Complaints</option>
+        <option id='water'>Water Complaints</option>
+        <option id='emergency'>Emergency Response</option>
+      </select>
+    </div>
+    <a class="btn btn-default" id="button" role="button">BUTTON</a>
+    <a class="btn btn-default" id="farms" role="button">Farms</a>
+    <a class="btn btn-default" id="toilets" role="button">Toilets</a>
+    <a class="btn btn-default" id="payphone" role="button">PayphoneCompl</a>
+    <a class="btn btn-default" id="water" role="button">WaterCompl</a>
+    <a class="btn btn-default" id="emergency" role="button">Emergency Responses</a>
   </div>
 
 
