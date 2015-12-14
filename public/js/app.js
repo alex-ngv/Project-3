@@ -295,38 +295,12 @@ $(function(){
             winnerDiv.html("The borough with the most " + $("#sel1 option:selected")[0].text.toLowerCase() + " is " + winnerData)
 
 
-    var mufasa = canvas.append("image")
-                .attr("xlink:href", "http://dash.ponychan.net/chan/files/src/136167943291.gif")
-                .attr("x", 1080)
-                .attr("y", 20)
-                .attr("width", 10)
-                .attr("height", 10)
-                .transition()
-                .delay(32000)
-                .duration(2000)
-                .attr("x",0)
-                .attr("y",0)
-                .attr("width", 560)
-                .attr("height", 560)
-                .transition()
-                .duration(500)
-                .attr("width", 0)
-                .attr("height", 0)
+
 
    }
 
-  var finishStuff = function(){
-      d3.selectAll(canvas).transition().duration(00).remove()
-
   }
 
-  var gullible = function () {
-    $(".data-vis").remove()
-    var frame = $('<iframe class="gulls" width="695" height="630" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" frameborder="0" allowfullscreen></iframe>').appendTo('body');
-    frame.css("position","absolute")
-    frame.css("top","180px")
-    frame.css("right","30px")
-  }
 
 
 });
