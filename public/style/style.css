@@ -1,0 +1,33 @@
+* {
+  font-family: 'Karla', sans-serif;
+}
+
+/***************** index.html *****************/
+#loggedInUser {
+  text-transform: capitalize;
+  font-size: 1.5em;
+  display: inline-block;
+  /*float: right;*/
+}
+
+#logout {
+  display: inline-block;
+  margin-left: 5px;
+  float: right;
+}
+
+/***************** map.js - Sho *****************/
+.active {
+  fill: orange;
+}
+
+.userSelection {
+  border: 4px solid rgb(200, 200, 200);
+  border-radius: 7px;
+  width: 400px;
+  font-size: 2em;
+  color: rgb(140, 140, 140);
+  margin: 10px auto;
+  padding: 3px;
+  text-align: center;
+}

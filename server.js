@@ -42,26 +42,6 @@ app.listen(3000, function () {
 
 //building some routes
 
-app.get('/farm/',authenticate, (req,res)=> {
-  api.farmMarkets (function(data){
-    res.send(data)
-  });
-})
-app.get('/toliet/',authenticate,(req,res)=>{
-  api.publicToilets (function(data){
-    res.send(data)
-  })
-})
-app.get('/payphone/',authenticate,(req,res)=>{
-  api.payphoneComplaints (function(data){
-    res.send(data)
-  })
-})
-app.get('/watercomplaints/',authenticate,(req,res)=>{
-  api.waterComplaints (function(data){
-    res.send(data)
-  })
-})
 //Controllers
 fs.readdirSync('./controllers').forEach(function (file) {
   if(file.substr(-3) == '.js') {

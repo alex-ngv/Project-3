@@ -32,6 +32,14 @@ module.exports = {
       }
       data(body)
     })
+  },
+  emergencyResponse: function (data) {
+    request("https://data.cityofnewyork.us/api/views/pasr-j7fb/rows.json?accessType=DOWNLOAD", function(error,response,body){
+      if(error){
+        console.log(error)
+      }
+      data(body)
+    })
   }
 
 }
