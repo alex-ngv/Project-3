@@ -1,7 +1,7 @@
 # NYC Data Visualization
 ## By [Alex](https://github.com/alex-ngv), [Sho](https://github.com/shoshaikh7) & [Yuriy](https://github.com/yuriyt2)
 
-[screenshot](./screenshot.png)
+![screenshot](./screenshot.png)
 
 ### Purpose
 -To allow users to visualize specific data from the NYC Open Data database broken down by borough.
