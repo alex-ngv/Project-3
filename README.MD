@@ -7,10 +7,10 @@
 -To allow users to visualize specific data from the NYC Open Data database broken down by borough.
 
 ### Features
--Users are required to create an account in order to access the application.
--A logged in user can select from a dropdown menu of available data points to visualize.
--The user is required to click on the borough they think ranks the highest in the selected dataset.
--Once a borough is selected a donut chart is shown representing the breakdown of the data by borough.
+*Users are required to create an account in order to access the application.
+*A logged in user can select from a dropdown menu of available data points to visualize.
+*The user is required to click on the borough they think ranks the highest in the selected dataset.
+*Once a borough is selected a donut chart is shown representing the breakdown of the data by borough.
 
 ### Technology Used
 -Node.js, Express, MongoDB, D3
